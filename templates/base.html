@@ -1,10 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang=en>
-
 <head>
+<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'creation/style.css' %}">
+<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-<h1>Create Character</h1>
-<p>This is where you create a {{html_var}}</p>
+<main class="wrapper">
+{% include "nav.html" %}
+{% block content %}{% endblock %}
+{% block footer %}
+<footer class="footer">
+<small>&copy; {% now "Y" %} Eric Hilario (s121102) for HIT237</small>
+</footer>
+{% endblock %}
+</main>
 </body>
 </html>

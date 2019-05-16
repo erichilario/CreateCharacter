@@ -1,47 +1,35 @@
 from django.db import models
 
-class Character(models.Model):
-	character_name = models.CharField(max_length=12, default='randomname') #need a function that pulls "unused" names from a dictionary.txt
-	character_image = models.ImageField() #this would depend on the class, race and attributes of the character e.g. orcbarb_m_a2 for orc barbarian male face a, feature 2
-	account = models.ForeignKey(
-		Account,
-		on_delete=models.CASCASE,
-		verbose_name="account character"
-	)
+
+class Account(models.Model):
+	account_name = 		models.CharField(max_length=100)
+	account_password = 	models.CharField(max_length=100)
+	account_email = 	models.CharField(max_length=100,blank=True, verbose_name='e-mail')
 
 	def __str__(self):
-		return self.hero_name #must be unique
+		return self.account_name
 
 class Race(models.Model):
-	race_name = models.CharField(max_length=20, default='Human')
-	race_story = models.TextField(max_length=500, default='Description')
-	character = models.ForeignKey(
-		Character,
-		on_delete=models.CASCADE,
-		verbose_name="character race"
-	)
-	race_image = models.ImageField()
+	race_name = 		models.CharField(max_length=20)
+	race_story = 		models.TextField(max_length=500, blank=True)
 
 	def __str__(self):
 		return self.race_name
 
-class Class(models.Model):
-	class_name = models.CharField(max_length=20, default='Barbarian')
-	class_story = models.TextField(max_length=500, default='Description')
-	character = models.ForeignKey(
-		Character,
-		on_delete=models.CASCASE,
-		verbose_name="character class"
-	)
-	class_image = models.ImageField()
+class Job(models.Model):
+	job_name = 			models.CharField(max_length=20)
+	job_story = 		models.TextField(max_length=500, blank=True)
+	race = 				models.ManyToManyField(Race)
 
 	def __str__(self):
-		return self.class_name
+		return self.job_name
 
-class Account(models.Model):
-	account_name = models.CharField(max_length=100, default='Account Name')
-	account_password = models.CharField(max_length=100, default='Password')
-	account_email = models.CharField(max_length=200, default='email@address.com')
+class Character(models.Model):
+	character_name = 	models.CharField(max_length=12) #need a function that pulls "unused" names from a dictionary.txt
+	character_date =	models.DateTimeField(blank=True,null=True)
+	account = 			models.ForeignKey(Account)
+	race =				models.ForeignKey(Race)
+	job = 				models.ForeignKey(Job)
 
 	def __str__(self):
-		return self.account_name
+		return self.character_name #must be unique
