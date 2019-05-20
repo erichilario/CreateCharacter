@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Characters - {{ block.super }}{% endblock %}
+{% block content %}
+<h2>Characters</h2>
+<div class="content">
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}.</p>
+
+{{ object_list }}
+{% for instance in object_list %}
+	<p>{{ instance.account }} - {{ instance.character_name }}</p>
+{% endfor %}
+<hr>
+{% for i in character_set.all %}
+	{{ i.character_name }}
+{% endfor %}
+
+{% else %}
+    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
+
+  
+{% endif %}
+
+
+
+
+ 
+ </div>
+{% endblock %}

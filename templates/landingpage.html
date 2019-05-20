@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home - {{ block.super }}{% endblock %}
+{% block content %}
+<h1>Landing Page</h1>
+<div class="content">
+
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}.</p>
+{% else %}
+    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
+{% endif %}
+
+<p>The Barrens launched mid 2018 as a progressive PvE Cross Faction Vanilla Server with dreams and aspirations to release an Oceanic based TBC Realm. During that time, we've progressed through vanilla content, and released our final &quot;Vanilla&quot; patch 2.0 on 17 March, 2019.</p>
+<p>During this time, the decision was made that we had enough players to transition to a PvP Realm, with cross-faction being disabled along with release of Patch 2.0.</p>
+<p>The Dark Portal will open on 30 March, 2019</p>
+<p>For information on how to get started playing on The Barrens, check out our handy <a href="https://the-barrens.org/guide">Quick Start Guide,</a> and don't forget to drop into our <a href="https://discord.gg/QUhguxE" target="_blank">Discord server</a> to say hi and meet other players.</p>
+<!--<img src="{% static 'creation/images/logo.png' %}" />-->
+
+<div class="statue statue1"></div>
+</div>
+{% endblock %}
+

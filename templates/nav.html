@@ -1,0 +1,26 @@
+{% load static %}
+{% block content %}
+<nav>
+
+	<div class="logo"><a href="/"><img class="hov" src="{% static 'creation/images/logo.png' %}" /></a></div>
+<!--	<ul>
+		<li class="logo"><a href="#"><img class="hov" src="{% static 'creation/images/logo.png' %}" /></a></li>
+	</ul>-->
+	<ul class="mid">
+
+<!--if logged in-->
+		<!--have a username/password textbox here-->
+{% if user.is_authenticated %}
+		<li class="btn"><a href="{% url 'characters' %}"><img src="{% static 'creation/images/characters.png' %}" /></a></li>
+		<li class="btn"><a href="{% url 'logout' %}"><img src="{% static 'creation/images/logout.png' %}" /></a></li>
+{% else %}
+		<li class="btn"><a href="{% url 'signup' %}"><img src="{% static 'creation/images/signup.png' %}" /></a></li>
+		<li class="btn"><a href="{% url 'login' %}"><img src="{% static 'creation/images/login.png' %}" /></a></li>
+{% endif %}
+		<li class="btn"><a href="{% url 'data-model' %}"><img src="{% static 'creation/images/erd.png' %}" /></a></li>
+		<li class="btn"><a href="{% url 'data-dictionary' %}"><img src="{% static 'creation/images/data-dictionary.png' %}" /></a></li>
+		<li class="btn"><a href="{% url 'user-guide' %}"><img src="{% static 'creation/images/user-guide.png' %}" /></a></li>
+	</ul>
+</nav>
+{% endblock %}
+
