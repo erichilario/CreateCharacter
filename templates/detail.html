@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Character Detail - {{ block.super }}{% endblock %}
+{% block content %}
+<h2>{{ c.character_name }}</h2>
+<div class="content">
+	{% if user.is_authenticated %}
+	    <!-- <p>Welcome, {{ user.username }}.</p> -->
+	<!-- {{ object_list }} -->
+	<div class="lfdiv">
+		<img src ="/static/creation/images/characters/{{ c.race.id }}{{ c.job.id }}{{ c.color.id }}{{ c.hair.id }}{{ c.face.id }}{{ c.sex.id }}.png" />
+
+    </div>
+	<div class="rtdiv">
+
+	<p class="char">{{ c.character_name }}<br>
+	{{ c.race }}<br>
+	{{ c.job }}</p>
+
+	<p><a href="#"><img class="glowBtn" src ="/static/creation/images/update.png" /></a></p>
+	<p><a href="#"><img class="glowBtn" src ="/static/creation/images/delete.png" /></a></p>
+
+
+
+
+	{% else %}
+	    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
+	{% endif %}
+	</div>
+</div>
+{% endblock %}

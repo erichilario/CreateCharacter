@@ -1,29 +1,41 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Characters - {{ block.super }}{% endblock %}
 {% block content %}
-<h2>Characters</h2>
+<h2>Characters of {{ user.username }}</h2>
 <div class="content">
-{% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }}.</p>
+	{% if user.is_authenticated %}
+	    <!-- <p>Welcome, {{ user.username }}.</p> -->
+	<!-- {{ object_list }} -->
+	<div class="lfdiv">
+		<img id ="imageOne" src ="/static/creation/images/layout/statue0.png" />
 
-{{ object_list }}
-{% for instance in object_list %}
-	<p>{{ instance.account }} - {{ instance.character_name }}</p>
-{% endfor %}
-<hr>
-{% for i in character_set.all %}
-	{{ i.character_name }}
-{% endfor %}
+    </div>
+	<div class="rtdiv">
+	{% for i in object_list %}
+	<script>
+	var image =  document.getElementById("imageOne");
 
-{% else %}
-    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
+	function changeColor{{ i.id }}()
+	{
+	        image.src = "/static/creation/images/characters/{{ i.race.id }}{{ i.job.id }}{{ i.color.id }}{{ i.hair.id }}{{ i.face.id }}{{ i.sex.id }}.png";
+	}
+	</script>
+		<!-- <p>{{ i.id }} - {{ i.account }} - {{ i.character_name }}</p> -->
+		<a href="/character/{{ i.id }}/{{ i.slug }}/"><p class="char" onmouseover = "changeColor{{ i.id }}()">
+		{{ i.character_name }}<br>
+		{{ i.race }} {{ i.job }}<br>
+		<!-- {{ i.race.id }}{{ i.job.id }}{{ i.color.id }}{{ i.hair.id }}{{ i.face.id }}{{ i.sex.id }} -->
+		</p></a>
+	{% endfor %}
+	<p><a href="{% url 'create' %}"><img class="glowBtn" src ="/static/creation/images/create.png" /></a></p>
 
-  
-{% endif %}
 
 
 
-
- 
- </div>
+	{% else %}
+	    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
+	{% endif %}
+	</div>
+</div>
 {% endblock %}

@@ -42,12 +42,45 @@ class Job(models.Model):
 	def __str__(self):
 		return self.job_name
 
+class Color(models.Model):
+	color_name =		models.CharField(max_length=6)
+
+	def __str__(self):
+		return self.color_name
+
+class Hair(models.Model):
+	hair_name =		models.CharField(max_length=5)
+
+	def __str__(self):
+		return self.hair_name
+
+class Face(models.Model):
+	face_name =		models.CharField(max_length=5)
+
+	def __str__(self):
+		return self.face_name
+
+class Sex(models.Model):
+	sex_name =		models.CharField(max_length=6)
+
+	def __str__(self):
+		return self.sex_name
+
 class Character(models.Model):
 	character_name = 	models.CharField(max_length=12, unique=True) #need a function that pulls "unused" names from a dictionary.txt
-	character_date =	models.DateTimeField(blank=True,null=True)
+	slug =				models.SlugField(max_length=12, null=True, blank=True, unique=True)
+	character_date =	models.DateTimeField(blank=True,null=True,auto_now_add=True)
+	character_update = 	models.DateTimeField(blank=True,null=True,auto_now=True)
 	account = 			models.ForeignKey(Account)
 	race =				models.ForeignKey(Race)
 	job = 				models.ForeignKey(Job)
+	color =				models.ForeignKey(Color, default="1")
+	hair = 				models.ForeignKey(Hair, default="1")
+	face =				models.ForeignKey(Face, default="1")
+	sex =				models.ForeignKey(Sex, default="1")
+
+	class Meta:
+		ordering = ['account','character_name']
 
 	def __str__(self):
 		return self.character_name #must be unique

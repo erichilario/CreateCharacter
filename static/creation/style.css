@@ -7,8 +7,6 @@
     font-style: normal;
 }
 
-
-
 html, body {
     height: 100vh;
     margin: 0;
@@ -175,8 +173,8 @@ stuck to bottom
 	height: 500px;
 	pointer-events:none;
 	position:absolute;
-		bottom:-56px;
-		left: -243px;
+  bottom:-56px;
+	left: -243px;
 	width: 330px;
 }
 .statue1 {
@@ -199,4 +197,60 @@ stuck to bottom
 }
 .statue6 {
 	background-image: url(images/layout/statue6.png);
+}
+
+/*****
+for characters.html
+*****/
+div.content > div.lfdiv {
+  float:left;
+  width:65%;
+  height: 450px;
+  margin-left:80px;
+}
+div.content > div.lfdiv > img {
+  height: 500px;
+  width:auto;
+  margin: 20px auto 0 auto;
+  
+}
+
+div.content > div.rtdiv > p > a > img.glowBtn:hover {
+        -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+   -webkit-box-shadow: 0px 0px 15px 3px rgba(0, 255, 0, 0.67);
+  -moz-box-shadow:    0px 0px 15px 3px rgba(0, 255, 0, 0.67);
+  box-shadow:         0px 0px 15px 3px rgba(0, 255, 0, 0.67);
+}
+
+div.content > div.rtdiv {
+  float:right;
+  width:25%;
+  font-size: 1em;
+  height: 480px;
+  margin-top:20px;
+
+  padding: 0 5px;
+  background-image: url(images/layout/content-tl1.png), url(images/layout/content-tr1.png), url(images/layout/content-bl.png), url(images/layout/content-br.png), url(images/layout/content-t1.gif), url(images/layout/content-b.gif), url(images/layout/content-l.gif), url(images/layout/content-r.gif), url(images/layout/content-bg.png);
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y, repeat;
+  background-position: left top, right top, bottom left, bottom right, top center, bottom, left center, right center, center;
+}
+div.content > div.rtdiv > a {
+  text-decoration: none;
+  color: #fff;
+}
+p.char {
+  border: 1px solid transparent; 
+  border-radius:2px 2px 0 0;
+  margin:10px;
+  text-align: center;
+}
+div.content > div.rtdiv > a > p.char:hover {
+  background: rgba(255, 186, 0, 0.30);
+  border-style: solid;
+  border-color: yellow;
+}
+div.content > div.rtdiv > a > p.char:focus {
+  background-color: red;
 }

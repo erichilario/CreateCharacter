@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.views.generic import TemplateView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from .forms import CharacterCreateForm
 from django.contrib.auth.views import logout
 
 #from .models import Profile, Account, Character, Race, Job
@@ -19,6 +20,9 @@ class IndexView(generic.ListView):
 # 	template_name = 'characters.html'
 
 def character_list_view(request):
+	if not request.user.is_authenticated():
+		return redirect('/login/')
+
 	queryset = Character.objects.filter(account__user=request.user)
 	context = {
 		"object_list": queryset
@@ -83,3 +87,24 @@ def LoginView(request):
 			messages.error(request, 'Error wrong username/password')
  
 	return render(request, 'login.html')
+
+def CharacterView(request, id, slug):
+	character = Character.objects.get(id=id)
+	context = {
+		'c': character,
+	}
+	return render(request, 'detail.html', context)
+
+def CharacterCreateView(request):
+	if request.method == 'POST':
+		form = CharacterCreateForm(request.POST)
+		if form.is_valid():
+			character = form.save(commit=False)
+			character.author = request.user
+			character.save()
+	else:
+		form = CharacterCreateForm()
+	context = {
+		"form": form,
+	}
+	return render(request, 'create.html', context)

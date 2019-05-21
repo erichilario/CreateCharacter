@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Characters - {{ block.super }}{% endblock %}
+{% block content %}
+<h2>Create Character</h2>
+<div class="content">
+	{% if user.is_authenticated %}
+
+		<form method="post">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="Create">
+		</form>
+
+	{% else %}
+	    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
+	{% endif %}
+	</div>
+</div>
+{% endblock %}
