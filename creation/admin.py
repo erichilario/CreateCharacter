@@ -25,7 +25,7 @@ class CustomUserAdmin(UserAdmin):
  
 class CharacterAdmin(admin.ModelAdmin):
 	list_display = ('character_name','slug','account','race','job')
-	list_filter = ('account','race','job','color',)
+	list_filter = ('account','race','job',)
 	search_fields = ('account__username', 'character_name')
 	prepopulated_fields = {'slug':('character_name',)}
 	list_editable = ('race','job',)
