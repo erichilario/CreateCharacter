@@ -1,47 +1,105 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
-class Character(models.Model):
-	character_name = models.CharField(max_length=12, default='randomname') #need a function that pulls "unused" names from a dictionary.txt
-	character_image = models.ImageField() #this would depend on the class, race and attributes of the character e.g. orcbarb_m_a2 for orc barbarian male face a, feature 2
-	account = models.ForeignKey(
-		Account,
-		on_delete=models.CASCASE,
-		verbose_name="account character"
-	)
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
+
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.profile.save()
+
+class Account(models.Model):
+	user = 				models.OneToOneField(User, related_name='profile')
+	#account_name = 		models.CharField(max_length=100)
+	account_password = 	models.CharField(max_length=100)
+	account_email = 	models.CharField(max_length=100,blank=True, verbose_name='e-mail')
 
 	def __str__(self):
-		return self.hero_name #must be unique
+		return self.user.username
+
+	def get_absolute_url(self):
+		return reverse('creation:profile', args=[self.user.username])
 
 class Race(models.Model):
-	race_name = models.CharField(max_length=20, default='Human')
-	race_story = models.TextField(max_length=500, default='Description')
-	character = models.ForeignKey(
-		Character,
-		on_delete=models.CASCADE,
-		verbose_name="character race"
-	)
-	race_image = models.ImageField()
+	race_name = 		models.CharField(max_length=20)
+	race_story = 		models.TextField(max_length=500, blank=True)
 
 	def __str__(self):
 		return self.race_name
 
-class Class(models.Model):
-	class_name = models.CharField(max_length=20, default='Barbarian')
-	class_story = models.TextField(max_length=500, default='Description')
-	character = models.ForeignKey(
-		Character,
-		on_delete=models.CASCASE,
-		verbose_name="character class"
-	)
-	class_image = models.ImageField()
+class Job(models.Model):
+	job_name = 			models.CharField(max_length=20)
+	job_story = 		models.TextField(max_length=500, blank=True)
+	race = 				models.ManyToManyField(Race)
 
 	def __str__(self):
-		return self.class_name
+		return self.job_name
 
-class Account(models.Model):
-	account_name = models.CharField(max_length=100, default='Account Name')
-	account_password = models.CharField(max_length=100, default='Password')
-	account_email = models.CharField(max_length=200, default='email@address.com')
+class Color(models.Model):
+	color_name =		models.CharField(max_length=6)
 
 	def __str__(self):
-		return self.account_name
+		return self.color_name
+
+class Hair(models.Model):
+	hair_name =		models.CharField(max_length=5)
+
+	def __str__(self):
+		return self.hair_name
+
+class Face(models.Model):
+	face_name =		models.CharField(max_length=5)
+
+	def __str__(self):
+		return self.face_name
+
+class Sex(models.Model):
+	sex_name =		models.CharField(max_length=6)
+
+	def __str__(self):
+		return self.sex_name
+
+class Character(models.Model):
+	character_name = 	models.CharField(max_length=12, unique=True) #need a function that pulls "unused" names from a dictionary.txt
+	slug =				models.SlugField(max_length=12, null=True, blank=True, unique=True)
+	character_date =	models.DateTimeField(blank=True,null=True,auto_now_add=True)
+	character_update = 	models.DateTimeField(blank=True,null=True,auto_now=True)
+	account = 			models.ForeignKey(Account)
+	race =				models.ForeignKey(Race)
+	job = 				models.ForeignKey(Job)
+	color =				models.ForeignKey(Color, default="1")
+	hair = 				models.ForeignKey(Hair, default="1")
+	face =				models.ForeignKey(Face, default="1")
+	sex =				models.ForeignKey(Sex, default="1")
+
+	class Meta:
+		ordering = ['account','character_name']
+
+	def __str__(self):
+		return self.character_name #must be unique
+
+# @receiver(post_save, sender=User)
+# def create_user(sender, **kwargs):
+#     if kwargs.get('created', False):
+#         Account.objects.get_or_create(user=kwargs.get('instance'))
+
+# @receiver(post_save, sender=User)
+# def create_account(sender, **kwargs):    
+#     if kwargs.get('created', False):
+#         Account.objects.get_or_create(account_name=kwargs.get('instance'))
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Account.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
