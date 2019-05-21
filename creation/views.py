@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.views.generic import TemplateView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CharacterCreateForm
+from .forms import *
 from django.contrib.auth.views import logout
 
 #from .models import Profile, Account, Character, Race, Job
@@ -88,7 +88,7 @@ def LoginView(request):
  
 	return render(request, 'login.html')
 
-def CharacterView(request, id, slug):
+def CharacterView(request, id):
 	character = Character.objects.get(id=id)
 	context = {
 		'c': character,
@@ -100,11 +100,41 @@ def CharacterCreateView(request):
 		form = CharacterCreateForm(request.POST)
 		if form.is_valid():
 			character = form.save(commit=False)
-			character.author = request.user
+			character.account = Account.objects.get(user=request.user) #https://stackoverflow.com/a/35567817
 			character.save()
+			return redirect('/characters/')
 	else:
 		form = CharacterCreateForm()
+	queryset = Character.objects.filter(account__user=request.user)
 	context = {
+		"object_list": queryset,
 		"form": form,
 	}
 	return render(request, 'create.html', context)
+
+def CharacterEditView(request, id):
+	character = get_object_or_404(Character, id=id)
+	#url = reverse('character', kwargs={'id': id, 'slug': character.character_name})
+#		character.id, character.character_name)
+	if request.method == 'POST':
+		form = CharacterEditForm(request.POST or None, instance=character)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect(character.get_absolute_url())
+			#return redirect('/characters/')
+			#return HttpResponseRedirect(url)
+	else:
+		form = CharacterEditForm(instance=character)
+	queryset = Character.objects.filter(account__user=request.user)
+	context = {
+		"object_list": queryset,
+		"form": form,
+		"character": character,
+	}
+	return render(request, 'edit.html', context)
+
+def CharacterDeleteView(request, id):
+	character = get_object_or_404(Character, id=id)
+
+	character.delete()
+	return redirect('/characters/')

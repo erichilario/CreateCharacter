@@ -37,6 +37,24 @@ text-shadow: 3px 4px 6px #965500, 0 0 0 #000, 1px 4px 6px #965500;
        1px 1px 0 #965500;
 
 }
+p.charname {
+
+  margin-top: 20px;
+  text-align:center;
+  padding: 0;
+  margin-bottom: 0;
+  font-size: 3em;
+  font-family: "Times New Roman", Times, serif;
+  /*color: rgba(41,103,0, 0.9);*/
+  color: rgba(251,183,0, 0.9);
+  text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,  
+      1px -1px 0 #965500,
+      -1px 1px 0 #965500,
+       1px 1px 0 #965500;
+
+}
 
 img {
 	cursor: pointer;
@@ -106,7 +124,7 @@ nav > ul  {
 https://codepen.io/anon/pen/ilqnb
 *****/
 
-nav > ul.mid > li > a > img:hover{
+.glowBtn:hover {
 	    -webkit-border-radius: 10px;
 	    -moz-border-radius: 10px;
 	    border-radius: 10px;
@@ -215,14 +233,6 @@ div.content > div.lfdiv > img {
   
 }
 
-div.content > div.rtdiv > p > a > img.glowBtn:hover {
-        -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      border-radius: 10px;
-   -webkit-box-shadow: 0px 0px 15px 3px rgba(0, 255, 0, 0.67);
-  -moz-box-shadow:    0px 0px 15px 3px rgba(0, 255, 0, 0.67);
-  box-shadow:         0px 0px 15px 3px rgba(0, 255, 0, 0.67);
-}
 
 div.content > div.rtdiv {
   float:right;
@@ -253,4 +263,52 @@ div.content > div.rtdiv > a > p.char:hover {
 }
 div.content > div.rtdiv > a > p.char:focus {
   background-color: red;
+}
+form {
+  /*margin-top: 50px;*/
+  
+  display: inline-block;
+  width: 450px;
+  height: 450px;
+}
+
+form table {
+  margin-left: 30px;
+}
+
+form table tr th {
+  text-align: right;
+  padding-right:10px;
+  padding-bottom:20px;
+}
+form table tr td {
+  padding-bottom:20px;
+  text-align: left;
+}
+
+/*form input[type=submit] */
+
+#editInput {
+  background-image: url(images/accept.png);
+  cursor: pointer;
+  width:215px;
+  height:30px;
+  border: 0;
+}
+#createInput {
+  background-image: url(images/create.png);
+  cursor: pointer;
+  width:215px;
+  height:30px;
+  border: 0;
+}
+.formcontainer {
+  text-align:center;
+}
+.bgImg {
+  position:absolute;
+  z-index:-1;
+}
+span.ylw {
+  color: #f8c600;
 }

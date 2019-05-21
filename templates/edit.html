@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Characters - {{ block.super }}{% endblock %}
 {% block content %}
-<h2>Create Character</h2>
+<h2>Edit Character</h2>
 <div class="content">
 <div class="lfdiv">
 <div class="formcontainer">
@@ -10,7 +10,7 @@
 	{% if user.is_authenticated %}
 
 		<form method="post">
-  <p class="charname">Describe this character</p>
+	<p class="charname">{{ character.character_name }}</p>
 			{% csrf_token %}
 
 			<!-- {{ form.as_p }} -->
@@ -34,7 +34,7 @@
       </tr>
     {% endfor %}
   </table>
-			<input id="createInput" class="glowBtn" type="submit" value="">
+			<input id="editInput" class="glowBtn" type="submit" value="">
 		</form>
 </div>
 </div>

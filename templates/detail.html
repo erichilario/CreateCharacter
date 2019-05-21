@@ -13,12 +13,13 @@
     </div>
 	<div class="rtdiv">
 
-	<p class="char">{{ c.character_name }}<br>
+	<p class="char"><span class="ylw">{{ c.character_name }}</span><br>
 	{{ c.race }}<br>
 	{{ c.job }}</p>
 
-	<p><a href="#"><img class="glowBtn" src ="/static/creation/images/update.png" /></a></p>
-	<p><a href="#"><img class="glowBtn" src ="/static/creation/images/delete.png" /></a></p>
+	<p><a href="{% url 'edit' id=c.id %}"><img class="glowBtn" src ="/static/creation/images/edit.png" /></a></p>
+	<p><a href="{% url 'delete' id=c.id %}" onclick="return confirm('Are you sure you want to delete this item?');"><img class="glowBtn" src ="/static/creation/images/delete.png" /></a></p>
+	<p><a href="{% url 'characters' %}"><img class="glowBtn" src ="/static/creation/images/back.png" /></a></p>
 
 
 

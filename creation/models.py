@@ -73,7 +73,7 @@ class Character(models.Model):
 	character_update = 	models.DateTimeField(blank=True,null=True,auto_now=True)
 	account = 			models.ForeignKey(Account)
 	race =				models.ForeignKey(Race)
-	job = 				models.ForeignKey(Job)
+	job = 				models.ForeignKey(Job, verbose_name="Class")
 	color =				models.ForeignKey(Color, default="1")
 	hair = 				models.ForeignKey(Hair, default="1")
 	face =				models.ForeignKey(Face, default="1")
@@ -83,17 +83,10 @@ class Character(models.Model):
 		ordering = ['account','character_name']
 
 	def __str__(self):
-		return self.character_name #must be unique
-
-# @receiver(post_save, sender=User)
-# def create_user(sender, **kwargs):
-#     if kwargs.get('created', False):
-#         Account.objects.get_or_create(user=kwargs.get('instance'))
-
-# @receiver(post_save, sender=User)
-# def create_account(sender, **kwargs):    
-#     if kwargs.get('created', False):
-#         Account.objects.get_or_create(account_name=kwargs.get('instance'))
+		return self.character_name
+	
+	def get_absolute_url(self):
+		return "/character/%d/" % self.id #fix later, maybe
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

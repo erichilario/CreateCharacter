@@ -37,8 +37,11 @@ urlpatterns = [
     #url(r'^characters/', CharactersView.as_view(), name='characters'),
     url(r'^characters/', character_list_view, name='characters'),
     
-    url(r'^character/(?P<id>\d+)/(?P<slug>[\w-]+)/$', CharacterView, name='character'),
-    
+    #url(r'^character/(?P<id>\d+)/(?P<slug>[\w-]+)/$', CharacterView, name='character'),
+    url(r'^character/(?P<id>\d+)/$', CharacterView, name='character'),
+    url(r'^edit/(?P<id>\d+)/$', CharacterEditView, name='edit'),
+        #(?P<slug>[\w-]+)/$', CharacterView, name='character'),
+    url(r'^delete/(?P<id>\d+)/$', CharacterDeleteView, name='delete'),
     url(r'create/$', CharacterCreateView, name='create'),
 
     url(r'^data-model/', DataModelView.as_view(), name='data-model'),
