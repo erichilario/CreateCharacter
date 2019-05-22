@@ -8,6 +8,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import *
 from django.contrib.auth.views import logout
+from django.contrib import messages
 from .models import Account, Character, Race, Job
 
 class IndexView(generic.ListView):
@@ -120,3 +121,6 @@ def CharacterDeleteView(request, id):
 
 	character.delete()
 	return redirect('/characters/')
+
+def error_404(request): #not sure how to pass "hero_list" to 404.html
+    return render(request, 'error_404.html')

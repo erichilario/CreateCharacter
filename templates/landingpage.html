@@ -7,7 +7,7 @@
 	{% if user.is_authenticated %}
 	    <p>Welcome, {{ user.username }}.</p>
 	{% else %}
-	    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>. For demonstration purposes, Use the username/password <span class="ylw">admin/admin</span>, <span class="ylw">stranger/stranger</span> or <span class="ylw">partner/partner</span> to temporarily login.</p>
+	    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.<br><br><span style="font-style: italic;">Author's note</span>: For demonstration purposes, use <span class="ylw">admin</span>, <span class="ylw">stranger</span> or <span class="ylw">partner</span> as username with <span class="ylw">creation</span> as password to login without signing up.</p>
 	{% endif %}
 	<hr>
 	<div class="tabbed">

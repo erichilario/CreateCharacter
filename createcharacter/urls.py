@@ -1,8 +1,8 @@
-from django.conf.urls import url
+from django.conf.urls import url, handler404, handler500
 from django.conf import settings
 from django.contrib.auth.views import logout
 from django.contrib import admin
-from creation import views
+
 from creation.views import *
 
 urlpatterns = [
@@ -20,3 +20,6 @@ urlpatterns = [
     url(r'^data-dictionary', DataDictionaryView.as_view(), name='data-dictionary'),
     url(r'^user-guide/', UserGuideView.as_view(), name='user-guide'),
 ]
+
+handler404 = error_404
+handler500 = error_404
