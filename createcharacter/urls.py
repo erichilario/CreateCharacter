@@ -7,7 +7,7 @@ from creation.views import *
 
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
-    url(r'^admin/', admin.site.urls), #disabled for deployment
+    #url(r'^admin/', admin.site.urls), #disabled for deployment
     url(r'^signup/$', signup, name='signup'),
     url(r'^login/$', LoginView, name='login'),
     url(r'^logout/$', LogoutView, name='logout'),

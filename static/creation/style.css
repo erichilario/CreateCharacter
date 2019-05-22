@@ -39,6 +39,7 @@ img {
   cursor: pointer;
 }
 .wrapper {
+  position: relative;
   margin: auto;
   min-height: 100%;
   width: 90%;
@@ -92,11 +93,13 @@ div.logo > a > img.hov:hover {
   background-image: url(images/layout/textbox-tl.png), url(images/layout/textbox-tr.png), url(images/layout/content-tl.png), url(images/layout/content-tr.png), url(images/layout/content-bl.png), url(images/layout/content-br.png), url(images/layout/content-t.gif), url(images/layout/content-b.gif), url(images/layout/content-l.gif), url(images/layout/content-r.gif), url(images/layout/content-bg.png);
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y, repeat;
   background-position: left top, right top, left top, right top, bottom left, bottom right, top center, bottom, left center, right center, center;
-  min-height: 500px;
+  height: 500px;
   padding:25px;
   margin: 0 auto;
-  position:relative;
+
   width: 60%;
+  overflow:hidden;
+  
 }
 .content p {
   padding:5px;
@@ -120,9 +123,10 @@ div.tabbed h4 {
   height: 500px;
   pointer-events:none;
   position:absolute;
-  bottom:-56px;
-  left: -243px;
+  bottom: 30px;
+  left: 70px;
   width: 330px;
+ 
 }
 .statue1 {
   background-image: url(images/layout/statue1.png);
@@ -137,6 +141,7 @@ div.tabbed h4 {
   background-image: url(images/layout/statue4.png);
 }
 .statue5 {
+  left: 35px;
   background-image: url(images/layout/statue5.png);
 }
 .statue6 {
@@ -160,6 +165,7 @@ div.content > div.rtdiv {
   height: 480px;
   margin-top:20px;
   padding: 0 5px;
+  overflow:auto;
   background-image: url(images/layout/content-tl1.png), url(images/layout/content-tr1.png), url(images/layout/content-bl.png), url(images/layout/content-br.png), url(images/layout/content-t1.gif), url(images/layout/content-b.gif), url(images/layout/content-l.gif), url(images/layout/content-r.gif), url(images/layout/content-bg.png);
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y, repeat;
   background-position: left top, right top, bottom left, bottom right, top center, bottom, left center, right center, center;
@@ -222,4 +228,45 @@ form table tr td {
 }
 span.ylw {
   color: #f8c600;
+}
+.dd {
+  width: 100%;
+  overflow: hidden;
+}
+.dd img {
+  display: inline-flex;
+  width: 100%;
+  margin-left:10px;
+  max-height: 100px;
+  object-fit: cover;
+  object-position: 0% 0%;
+}
+img.bordered{
+  border:3px solid #f8c600;
+}
+.guide {
+  list-style-type: none; 
+}
+.guide li {
+  padding-bottom: 10px;
+}
+.ablink {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+.ablink:hover {
+  color: #2c85f4;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.alink {
+  color: #2c85f4;
+  text-decoration: none;
+}
+.alink:hover {
+  text-decoration: underline;
+}
+.alink:active {
+  color:#f8c600;
 }

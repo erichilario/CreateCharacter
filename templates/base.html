@@ -5,6 +5,7 @@
 	<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'creation/style.css' %}">
 	<title>{% block title %}Character Creation{% endblock %}</title>
+	{% block extra_head_tags %}{% endblock %}
 </head>
 <body>
 	<main class="wrapper">

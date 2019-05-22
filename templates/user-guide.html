@@ -1,9 +1,60 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}User Guide - {{ block.super }}{% endblock %}
 {% block content %}
 <h2>User Guide</h2>
 <div class="content">
-	<p>User Guide</p>
+		<div style="transform: scale(2.1);visibility:hidden; position: absolute;z-index:2;top:25%;left:15%;text-align:center;" id="g1" onclick="this.style.visibility='hidden';">
+			<img class="bordered" src="{% static 'creation/images/guides/01.gif' %}">
+		</div>
+		<div style="transform: scale(2.1);visibility:hidden; position: absolute;z-index:2;top:25%;left:15%;text-align:center;" id="g2" onclick="this.style.visibility='hidden';">
+			<img class="bordered" src="{% static 'creation/images/guides/02.gif' %}">
+		</div>
+		<div style="transform: scale(2.1);visibility:hidden; position: absolute;z-index:2;top:25%;left:15%;text-align:center;" id="g3" onclick="this.style.visibility='hidden';">
+			<img class="bordered" src="{% static 'creation/images/guides/03.gif' %}">
+		</div>
+		<div style="transform: scale(2.1);visibility:hidden; position: absolute;z-index:2;top:25%;left:15%;text-align:center;" id="g4" onclick="this.style.visibility='hidden';">
+			<img class="bordered" src="{% static 'creation/images/guides/04.gif' %}">
+		</div>
+		<div style="transform: scale(2.1);visibility:hidden; position: absolute;z-index:2;top:25%;left:15%;text-align:center;" id="g5" onclick="this.style.visibility='hidden';">
+			<img class="bordered" src="{% static 'creation/images/guides/05.gif' %}">
+		</div>
+		<div style="transform: scale(2.1);visibility:hidden; position: absolute;z-index:2;top:25%;left:15%;text-align:center;" id="g7" onclick="this.style.visibility='hidden';">
+			<img class="bordered" src="{% static 'creation/images/guides/07.gif' %}">
+		</div>
+		<div style="transform: scale(2.1);visibility:hidden; position: absolute;z-index:2;top:25%;left:15%;text-align:center;" id="g8" onclick="this.style.visibility='hidden';">
+			<img class="bordered" src="{% static 'creation/images/guides/08.gif' %}">
+		</div>
+
+
+		<!-- Script to hide/unhide the "zoomed" image -->
+		<script type="text/javascript">
+		function toggler (z) {
+
+			var x = document.getElementById(z);
+			if (x.style.visibility === 'hidden') {
+				x.style.visibility = 'visible';
+			} else {
+				x.style.visibility = 'hidden';
+			}
+		}
+		</script>
+	<div class="dd">
+
+		<p><span class="ylw">Clicking a guide below opens an animated GIF.</span><br>Also <a class="alink" href="https://erichilario.pythonanywhere.com/static/HILARIO, Eric 121102 - HIT237 Assignment 2 Task 2.pdf">available as a PDF</a>.</p>
+		<ul class="guide">
+			<li><a class="ablink" onclick="toggler(g1.id)">Create an account</a></li>
+			<li><a class="ablink" onclick="toggler(g2.id)">Login to an existing account</a></li>
+			<li><a class="ablink" onclick="toggler(g3.id)">Create a character</a></li>
+			<li><a class="ablink" onclick="toggler(g4.id)">Edit a character</a></li>
+			<li><a class="ablink" onclick="toggler(g5.id)">View characters</a></li>
+			<li><a class="ablink" onclick="toggler(g7.id)">Delete a character</a></li>
+			<li><a class="ablink" onclick="toggler(g8.id)">Logout</a></li>
+		</ul>
+		<!-- <p>Page 2 - Race, Job(aka Class), Color and Face Tables<img class="dd2" src="{% static 'creation/images/data-dict2.png' %}" onclick="toggler(d2.id)" /></p>
+		<p>Page 3 - Hair and Sex Tables<img class="dd3" src="{% static 'creation/images/data-dict3.png' %}" onclick="toggler(d3.id)" /></p></p> -->
+	</div>
+
 	<div class="statue statue5"></div>
 </div>
 {% endblock %}
