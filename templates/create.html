@@ -4,53 +4,52 @@
 {% block content %}
 <h2>Create Character</h2>
 <div class="content">
-<div class="lfdiv">
-<div class="formcontainer">
+  <div class="lfdiv">
+    <div class="formcontainer">
+    	{% if user.is_authenticated %}
 
-	{% if user.is_authenticated %}
+    		<form method="post">
+          <p class="charname">Describe this character</p>
+        			{% csrf_token %}
 
-		<form method="post">
-  <p class="charname">Describe this character</p>
-			{% csrf_token %}
+              {{ form.non_field_errors }}
 
-			<!-- {{ form.as_p }} -->
-<!-- https://simpleisbetterthancomplex.com/article/2017/08/19/how-to-render-django-form-manually.html -->
-  {{ form.non_field_errors }}
+              {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field.errors }}
+                {{ hidden_field }}
+              {% endfor %}
 
-  {% for hidden_field in form.hidden_fields %}
-    {{ hidden_field.errors }}
-    {{ hidden_field }}
-  {% endfor %}
+          <table>
+            {% for field in form.visible_fields %}
+              <tr>
+                <th>{{ field.label_tag }}</th>
+                <td>
+                  {{ field.errors }}
+                  {{ field }}
+                  {{ field.help_text }}
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
 
-  <table>
-    {% for field in form.visible_fields %}
-      <tr>
-        <th>{{ field.label_tag }}</th>
-        <td>
-          {{ field.errors }}
-          {{ field }}
-          {{ field.help_text }}
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
-			<input id="createInput" class="glowBtn" type="submit" value="">
-		</form>
-</div>
-</div>
-<div class="rtdiv">
-	{% for i in object_list %}
-		<a href="/character/{{ i.id }}/"><p class="char" onmouseover = "changeColor{{ i.id }}()">
-		<span class="ylw">{{ i.character_name }}</span><br>
-		{{ i.race }} {{ i.job }}<br>
-		</p></a>
-	{% endfor %}
+     			<input id="createInput" class="glowBtn" type="submit" value="">
+    		</form>
+    </div>
+  </div>
 
-<p><a href="{% url 'characters' %}"><img class="glowBtn" src ="/static/creation/images/back.png" /></a></p></div>
-	{% else %}
-	    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
-	{% endif %}
+  <div class="rtdiv">
+  	{% for i in object_list %}
+    <a href="{% url 'character' i.id %}"><p class="char" onmouseover = "changeColor{{ i.id }}()">
+  		<span class="ylw">{{ i.character_name }}</span><br>
+  		{{ i.race }} {{ i.job }}<br>
+  		</p></a>
+  	{% endfor %}
 
-	</div>
+    <p><a href="{% url 'characters' %}"><img class="glowBtn" src ="/static/creation/images/back.png" /></a></p></div>
+  	{% else %}
+  	    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
+  	{% endif %}
+
+  </div>
 </div>
 {% endblock %}

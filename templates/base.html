@@ -2,21 +2,18 @@
 <!DOCTYPE html>
 <html lang=en>
 <head>
-<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'creation/style.css' %}">
-<title>{% block title %}Character Creation{% endblock %}</title>
+	<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'creation/style.css' %}">
+	<title>{% block title %}Character Creation{% endblock %}</title>
 </head>
 <body>
-<main class="wrapper">
-{% include "nav.html" %}
-{% block content %}{% endblock %}
-
-{% block footer %}
-<div class="push"></div>
-{% endblock %}
-</main>
-<footer class="footer">
-<small>&copy; {% now "Y" %} Eric Hilario (s121102) for HIT237</small>
-</footer>
+	<main class="wrapper">
+		{% include "nav.html" %}
+		{% block content %}{% endblock %}
+		{% block footer %}<div class="push"></div>{% endblock %}
+	</main>
+	<footer class="footer">
+		<small>&copy; {% now "Y" %} Eric Hilario (s121102) for HIT237</small>
+	</footer>
 </body>
 </html>

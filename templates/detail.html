@@ -5,28 +5,22 @@
 <h2>{{ c.character_name }}</h2>
 <div class="content">
 	{% if user.is_authenticated %}
-	    <!-- <p>Welcome, {{ user.username }}.</p> -->
-	<!-- {{ object_list }} -->
+
 	<div class="lfdiv">
 		<img src ="/static/creation/images/characters/{{ c.race.id }}{{ c.job.id }}{{ c.color.id }}{{ c.hair.id }}{{ c.face.id }}{{ c.sex.id }}.png" />
-
     </div>
+
 	<div class="rtdiv">
+		<p class="char"><span class="ylw">{{ c.character_name }}</span><br>
+		{{ c.race }} {{ c.job }}</p>
 
-	<p class="char"><span class="ylw">{{ c.character_name }}</span><br>
-	{{ c.race }}<br>
-	{{ c.job }}</p>
+		<p><a href="{% url 'edit' id=c.id %}"><img class="glowBtn" src ="/static/creation/images/edit.png" /></a></p>
+		<p><a href="{% url 'delete' id=c.id %}" onclick="return confirm('Are you sure you want to delete this item?');"><img class="glowBtn" src ="/static/creation/images/delete.png" /></a></p>
+		<p><a href="{% url 'characters' %}"><img class="glowBtn" src ="/static/creation/images/back.png" /></a></p>
 
-	<p><a href="{% url 'edit' id=c.id %}"><img class="glowBtn" src ="/static/creation/images/edit.png" /></a></p>
-	<p><a href="{% url 'delete' id=c.id %}" onclick="return confirm('Are you sure you want to delete this item?');"><img class="glowBtn" src ="/static/creation/images/delete.png" /></a></p>
-	<p><a href="{% url 'characters' %}"><img class="glowBtn" src ="/static/creation/images/back.png" /></a></p>
-
-
-
-
-	{% else %}
-	    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
-	{% endif %}
+		{% else %}
+		    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
+		{% endif %}
 	</div>
 </div>
 {% endblock %}

@@ -5,10 +5,10 @@
 <h2>Log out</h2>
 <div class="content">
 
-{% if user.is_authenticated %}
-	<p>Welcome, {{ user.username }}.</p>
-{% else %}
-	<p>Logged out.</p>
-{% endif %}
+	{% if user.is_authenticated %}
+		<p>Welcome, {{ user.username }}.</p>
+	{% else %}
+		<p>Logged out.</p>
+	{% endif %}
 </div>
 {% endblock %}

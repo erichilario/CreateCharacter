@@ -4,19 +4,24 @@
 {% block content %}
 <h1>Landing Page</h1>
 <div class="content">
+	{% if user.is_authenticated %}
+	    <p>Welcome, {{ user.username }}.</p>
+	{% else %}
+	    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>. For demonstration purposes, Use the username/password <span class="ylw">admin/admin</span>, <span class="ylw">stranger/stranger</span> or <span class="ylw">partner/partner</span> to temporarily login.</p>
+	{% endif %}
+	<hr>
+	<div class="tabbed">
+		<h4>Summary</h4>
+		<p>This project was created by Eric Hilario (s121102) for HIT237 - Building Interactive Software in Semester 1 of 2019. It is currently hosted in <a href="https://erichilario.pythonanywhere.com">https://erichilario.pythonanywhere.com</a> as proof of concept, while the code is maintained in <a href="https://github.com/erichilario/createcharacter">https://github.com/erichilario/createcharacter</a>.</p>
 
-{% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }}.</p>
-{% else %}
-    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
-{% endif %}
+		<p>The task was to build an interactive database-driven website using Django forms to provide CRUD (Create, Read, Update and Delete) functionality for the records in the database.</p>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vestibulum neque lectus, a pulvinar elit maximus vitae. Nulla erat urna, tempor et lectus a, ultrices gravida elit. Maecenas venenatis eros eget facilisis pellentesque. Morbi vehicula orci ex, ullamcorper scelerisque tellus consequat eu. Nam congue efficitur sapien sed viverra. Suspendisse condimentum in ipsum a facilisis. Nullam orci sem, molestie at imperdiet at, blandit accumsan enim. Aliquam sagittis elit dui, at lobortis quam pretium et. In eros orci, tempor tincidunt facilisis vel, dictum ultrices ex.</p>
-
-<p>Cras rhoncus turpis in justo ultrices, id fringilla neque tempor. Mauris aliquet libero magna, ac ullamcorper risus consectetur eu. Integer ut mollis orci. Vivamus fermentum sollicitudin purus, vel facilisis dolor vulputate a. Donec luctus metus nec elit malesuada sollicitudin. Aliquam faucibus nibh quis auctor tempor. Proin quis turpis at nisi molestie convallis. Aliquam sagittis semper diam at consequat. Donec ut risus tristique, facilisis est in, viverra justo.</p>
-<!--<img src="{% static 'creation/images/logo.png' %}" />-->
-
-<div class="statue statue1"></div>
+		<p>The idea is to create a "Character Creation" screen for a fictional web-based MMORPG. The characters created by the user are then represented graphically in a character selection screen. Clicking on a character will allow for editing its name and attributes as well as deleting it entirely. Models, graphics, fonts, styling and various other imagery were heavily inspired by and based on the popular MMORPG World of Warcraft (specifically 2.4.3).</p>
+		<h4>Requirements</h4>
+		<p>The scope of this topic allowed for meeting the minimum data complexity requirement of 2 additional tables associated with the principal topic. Django's built-in User model was also utilised. Django v1.11.2 and Python 3.6.4 were used in creating this project. Among the requirements met were persistent navigation options, logical links to the detail page of each record as well as buttons within the various forms to create, edit and delete a record. SQLite3 baked into Django was the natural database of choice. There are forms to create and edit the characters that accept user input which in turn, makes changes to the database and automagically updates the graphical representation of the character. Deletion of a record asks for confirmation. Hyperlinks all use the &#123;&#37;url&#37;&#125; tag. Temp accounts provided to view the records of the pre-populated database. Documentation requirements are in the link above and also in PDF form.
+		</p>
+	</div>
+	<div class="statue statue1"></div>
 </div>
 {% endblock %}
 

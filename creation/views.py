@@ -8,16 +8,11 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import *
 from django.contrib.auth.views import logout
-
-#from .models import Profile, Account, Character, Race, Job
 from .models import Account, Character, Race, Job
 
 class IndexView(generic.ListView):
 	template_name = 'landingpage.html'
 	model = Account
-
-# class CharactersView(TemplateView):
-# 	template_name = 'characters.html'
 
 def character_list_view(request):
 	if not request.user.is_authenticated():
@@ -32,11 +27,6 @@ def character_list_view(request):
 class DataModelView(TemplateView):
 	template_name = 'data-model.html'
 
-# def index(request):
-# 	#html_var = 'hi'
-# 	return render(request, "base.html", {"html_var": True})
-# 	#return HttpResponse("Create index")
-
 class DataDictionaryView(TemplateView):
 	template_name = 'data-dictionary.html'
 
@@ -50,7 +40,6 @@ def LogoutView(request):
 
 def signup(request):
 	if request.user.is_authenticated():
-		#return redirect('creation:admin')
 		return redirect('/')
 
 	if request.method == 'POST':
@@ -77,11 +66,8 @@ def LoginView(request):
 		user = authenticate(username=username, password=password)
  
 		if user is not None:
-			# correct username and password login the user
 			login(request, user)
-			#return redirect('creation:user_details')
 			return redirect('/')
-
  
 		else:
 			messages.error(request, 'Error wrong username/password')
@@ -100,7 +86,7 @@ def CharacterCreateView(request):
 		form = CharacterCreateForm(request.POST)
 		if form.is_valid():
 			character = form.save(commit=False)
-			character.account = Account.objects.get(user=request.user) #https://stackoverflow.com/a/35567817
+			character.account = Account.objects.get(user=request.user)
 			character.save()
 			return redirect('/characters/')
 	else:
@@ -114,15 +100,11 @@ def CharacterCreateView(request):
 
 def CharacterEditView(request, id):
 	character = get_object_or_404(Character, id=id)
-	#url = reverse('character', kwargs={'id': id, 'slug': character.character_name})
-#		character.id, character.character_name)
 	if request.method == 'POST':
 		form = CharacterEditForm(request.POST or None, instance=character)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect(character.get_absolute_url())
-			#return redirect('/characters/')
-			#return HttpResponseRedirect(url)
 	else:
 		form = CharacterEditForm(instance=character)
 	queryset = Character.objects.filter(account__user=request.user)

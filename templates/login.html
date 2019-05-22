@@ -5,57 +5,40 @@
 <h2>Sign up</h2>
 <div class="content">
 
-{% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }}.</p>
-{% else %}
-    <p>Welcome, new user. Please login below.</p>
-<p>
-
- 
- 
-            {% if messages %}
-                {% for message in messages %}
-                    <p class="alert alert-info">{{ message }}</p>
-                {% endfor %}
-            {% endif %}
-            
-                <form method="post">
- 
-                    {% csrf_token %}
- 
-                    <table class="table">
-                        <tr>
-                            <th><label for="id_username">Username:</label></th>
-                            <td><input type="text" name="username" id="id_username" required /></td>
-                        </tr>
-                        <tr>
-                            <th><label for="id_password">Password:</label></th>
-                            <td><input type="password" name="password" id="id_password" required /></td>
-                        </tr>
-                        <tr>
-                            <td><input type="hidden" name="next" value=""></td>
-                            <td><button type="submit" class="btn btn-primary">Submit</button></td>
-                        </tr>
-                    </table>
- 
-                </form>            
- 
-<!--             <h4>Related Links</h4>
-            <p>
-                <a href="/password-reset/">Forgot Password?</a> <br>
-                <a href="/register/">Create new account.</a> <br>
-                <a href="/contact/">Feedback</a>
-            </p>
- --> 
-
-
-{% endif %}
-
-
- </p>
-
-
- <div class="statue statue2"></div>
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}.</p>
+    {% else %}
+        <p>Welcome, new user. Please login below.</p>
+        <p>
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="alert alert-info">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+                
+                    <form method="post">
+     
+                        {% csrf_token %}
+     
+                        <table class="table">
+                            <tr>
+                                <th><label for="id_username">Username:</label></th>
+                                <td><input type="text" name="username" id="id_username" required /></td>
+                            </tr>
+                            <tr>
+                                <th><label for="id_password">Password:</label></th>
+                                <td><input type="password" name="password" id="id_password" required /></td>
+                            </tr>
+                            <tr>
+                                <td><input type="hidden" name="next" value=""></td>
+                                <td><button type="submit" class="btn btn-primary">Submit</button></td>
+                            </tr>
+                        </table>
+     
+                    </form>            
+        </p>
+    {% endif %}
+     <div class="statue statue2"></div>
  </div>
 
 {% endblock %}

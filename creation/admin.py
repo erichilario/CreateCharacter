@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-#from creation.models import Profile, Account, Character, Race, Job
 from creation.models import *
 
 class CharacterInstanceInline(admin.TabularInline):
@@ -30,10 +29,8 @@ class CharacterAdmin(admin.ModelAdmin):
 	prepopulated_fields = {'slug':('character_name',)}
 	list_editable = ('race','job',)
  
-admin.site.unregister(User) # unregister User model
-admin.site.register(User, CustomUserAdmin) # register User model with changes
-
-#admin.site.register(Profile)
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
 admin.site.register(Account, AccountAdmin)
 admin.site.register(Character, CharacterAdmin)
 admin.site.register(Race)

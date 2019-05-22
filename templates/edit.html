@@ -1,56 +1,55 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Characters - {{ block.super }}{% endblock %}
+{% block title %}Edit Character - {{ block.super }}{% endblock %}
 {% block content %}
 <h2>Edit Character</h2>
 <div class="content">
-<div class="lfdiv">
-<div class="formcontainer">
+  <div class="lfdiv">
+    <div class="formcontainer">
+      {% if user.is_authenticated %}
 
-	{% if user.is_authenticated %}
+        <form method="post">
+          <p class="charname">{{ character.character_name }}</p>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
 
-		<form method="post">
-	<p class="charname">{{ character.character_name }}</p>
-			{% csrf_token %}
+            {% for hidden_field in form.hidden_fields %}
+              {{ hidden_field.errors }}
+              {{ hidden_field }}
+            {% endfor %}
 
-			<!-- {{ form.as_p }} -->
-<!-- https://simpleisbetterthancomplex.com/article/2017/08/19/how-to-render-django-form-manually.html -->
-  {{ form.non_field_errors }}
+          <table>
+            {% for field in form.visible_fields %}
+            <tr>
+              <th>{{ field.label_tag }}</th>
+              <td>
+                {{ field.errors }}
+                {{ field }}
+                {{ field.help_text }}
+              </td>
+              </tr>
+            {% endfor %}
+          </table>
+          
+          <input id="editInput" class="glowBtn" type="submit" value="">
+        </form>
+      </div>
+    </div>
+    
+    <div class="rtdiv">
+      {% for i in object_list %}
+        <a href="{% url 'character' i.id %}"><p class="char" onmouseover = "changeColor{{ i.id }}()">
+        <span class="ylw">{{ i.character_name }}</span><br>
+        {{ i.race }} {{ i.job }}<br>
+        </p></a>
+      {% endfor %}
 
-  {% for hidden_field in form.hidden_fields %}
-    {{ hidden_field.errors }}
-    {{ hidden_field }}
-  {% endfor %}
+      <p><a href="{% url 'characters' %}"><img class="glowBtn" src ="/static/creation/images/back.png" /></a></p></div>
 
-  <table>
-    {% for field in form.visible_fields %}
-      <tr>
-        <th>{{ field.label_tag }}</th>
-        <td>
-          {{ field.errors }}
-          {{ field }}
-          {{ field.help_text }}
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
-			<input id="editInput" class="glowBtn" type="submit" value="">
-		</form>
-</div>
-</div>
-<div class="rtdiv">
-	{% for i in object_list %}
-		<a href="/character/{{ i.id }}/"><p class="char" onmouseover = "changeColor{{ i.id }}()">
-		<span class="ylw">{{ i.character_name }}</span><br>
-		{{ i.race }} {{ i.job }}<br>
-		</p></a>
-	{% endfor %}
+    {% else %}
+      <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
+    {% endif %}
 
-<p><a href="{% url 'characters' %}"><img class="glowBtn" src ="/static/creation/images/back.png" /></a></p></div>
-	{% else %}
-	    <p>Welcome, new user. Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
-	{% endif %}
-
-	</div>
+  </div>
 </div>
 {% endblock %}
