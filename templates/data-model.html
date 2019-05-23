@@ -1,31 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Data Model - {{ block.super }}{% endblock %}
-
 {% block content %}
-<h2>Data Model</h2>
+<h2>High-level ERD</h2>
 <div class="content">
-		<div style="transform: scale(2.3);visibility:hidden; position: absolute;z-index:2;top:35%;left:25%;text-align:center;" id="d1" onclick="this.style.visibility='hidden';">
-			<img class="bordered" src="{% static 'creation/images/task2_erdbw.png' %}">
-		</div>
+	<div id="f1" onclick="this.style.visibility='hidden';">
+		<img class="bordered" src="{% static 'creation/images/task2_erdbw.png' %}">
+	</div>
+	<p><span class="ylw">Click on the image to zoom</span><br>Also <a class="alink" href="https://erichilario.pythonanywhere.com/HILARIO, Eric 121102 - HIT237 Assignment 2 Task 2.pdf">included in the Task 2 Documentation PDF</a>.</p>
+		<img src="{% static 'creation/images/task2_erdtransparent.png' %}" onclick="toggler(f1.id)" />
 
-		<!-- Script to hide/unhide the "zoomed" image -->
-		<script type="text/javascript">
-		function toggler() {
-
-			var x = document.getElementById(d1.id);
-			if (x.style.visibility === 'hidden') {
-				x.style.visibility = 'visible';
-			} else {
-				x.style.visibility = 'hidden';
-			}
-		}
-		</script>
-
-		<p><span class="ylw">Click on the image to zoom</span><br>High-level Entity Relationship Diagram also <a class="alink" href="https://erichilario.pythonanywhere.com/static/HILARIO, Eric 121102 - HIT237 Assignment 2 Task 2.pdf">available as a PDF</a>.</p>
-			<img src="{% static 'creation/images/task2_erdtransparent.png' %}" onclick="toggler()" />
-
-		<small>Disclaimer: The Django User Model is not claimed to be a part of the requirements of this project and is only illustrated to display the relationship.</small>
-<div class="statue statue3"></div>
+	<small>Disclaimer: The Django User Model is not claimed to be a part of the requirements of this project and is only illustrated to display the relationship.</small>
+	<div class="statue statue3"></div>
 </div>
 {% endblock %}

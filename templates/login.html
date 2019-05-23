@@ -2,7 +2,7 @@
 {% block title %}Login - {{ block.super }}{% endblock %}
 
 {% block content %}
-<h2>Sign up</h2>
+<h2>Login</h2>
 <div class="content">
 
     {% if user.is_authenticated %}
@@ -10,35 +10,35 @@
     {% else %}
         <p>Welcome, new user. Please login below.</p>
         <p>
-                {% if messages %}
-                    {% for message in messages %}
-                        <p class="alert">{{ message }}</p>
-                    {% endfor %}
-                {% endif %}
-                
-                    <form method="post">
-     {{ login_message }}
-                        {% csrf_token %}
-     
-                        <table class="table">
-                            <tr>
-                                <th><label for="id_username">Username:</label></th>
-                                <td><input type="text" name="username" id="id_username" required /></td>
-                            </tr>
-                            <tr>
-                                <th><label for="id_password">Password:</label></th>
-                                <td><input type="password" name="password" id="id_password" required /></td>
-                            </tr>
-                            <tr>
-                                <td><input type="hidden" name="next" value=""></td>
-                                <td><button type="submit" class="btn btn-primary">Submit</button></td>
-                            </tr>
-                        </table>
-     
-                    </form>            
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="alert">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            
+                <form method="post">
+                    {{ login_message }}
+                    {% csrf_token %}
+ 
+                    <table class="table">
+                        <tr>
+                            <th><label for="id_username">Username:</label></th>
+                            <td><input type="text" name="username" id="id_username" required /></td>
+                        </tr>
+                        <tr>
+                            <th><label for="id_password">Password:</label></th>
+                            <td><input type="password" name="password" id="id_password" required /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="hidden" name="next" value=""></td>
+                            <td><button type="submit" class="btn btn-primary">Submit</button></td>
+                        </tr>
+                    </table>
+ 
+                </form>            
         </p>
     {% endif %}
-     <div class="statue statue2"></div>
+     <div class="statue statue6"></div>
  </div>
 
 {% endblock %}

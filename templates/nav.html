@@ -1,22 +1,15 @@
 {% load static %}
 {% block content %}
 <nav>
-
 	<div class="logo"><a href="{% url 'index' %}"><img class="hov" src="{% static 'creation/images/logo.png' %}" /></a></div>
-<!--	<ul>
-		<li class="logo"><a href="#"><img class="hov" src="{% static 'creation/images/logo.png' %}" /></a></li>
-	</ul>-->
-	<ul class="mid">
-
-<!--if logged in-->
-		<!--have a username/password textbox here-->
-{% if user.is_authenticated %}
+	<ul>
+	{% if user.is_authenticated %}
 		<li class="btn"><a href="{% url 'characters' %}"><img class="glowBtn" src="{% static 'creation/images/characters.png' %}" /></a></li>
 		<li class="btn"><a href="{% url 'logout' %}"><img class="glowBtn" src="{% static 'creation/images/logout.png' %}" /></a></li>
-{% else %}
+	{% else %}
 		<li class="btn"><a href="{% url 'signup' %}"><img class="glowBtn" src="{% static 'creation/images/signup.png' %}" /></a></li>
 		<li class="btn"><a href="{% url 'login' %}"><img class="glowBtn" src="{% static 'creation/images/login.png' %}" /></a></li>
-{% endif %}
+	{% endif %}
 		<li class="btn"><a href="{% url 'data-model' %}"><img class="glowBtn" src="{% static 'creation/images/erd.png' %}" /></a></li>
 		<li class="btn"><a href="{% url 'data-dictionary' %}"><img class="glowBtn" src="{% static 'creation/images/data-dictionary.png' %}" /></a></li>
 		<li class="btn"><a href="{% url 'user-guide' %}"><img class="glowBtn" src="{% static 'creation/images/user-guide.png' %}" /></a></li>

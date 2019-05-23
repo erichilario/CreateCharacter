@@ -1,39 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Data Dictionary - {{ block.super }}{% endblock %}
-
 {% block content %}
 <h2>Data Dictionary</h2>
 <div class="content">
-		
-		<div style="transform: scale(1.4);visibility:hidden; position: absolute;z-index:2;top:20%;left:5%;text-align:center;" id="d1" onclick="this.style.visibility='hidden';">
-			<img class="bordered" src="{% static 'creation/images/data-dict1.png' %}">
-		</div>
-		<div style="transform: scale(1.4);visibility:hidden; position: absolute;z-index:3;top:20%;left:5%;text-align:center;" id="d2" onclick="this.style.visibility='hidden';">
-			<img class="bordered" src="{% static 'creation/images/data-dict2.png' %}">
-		</div>
-		<div style="transform: scale(1.4);visibility:hidden; position: absolute;z-index:4;top:20%;left:5%;text-align:center;" id="d3" onclick="this.style.visibility='hidden';">
-			<img class="bordered" src="{% static 'creation/images/data-dict3.png' %}">
-		</div>
-
-		<!-- Script to hide/unhide the "zoomed" image -->
-		<script type="text/javascript">
-		function toggler (z) {
-
-			var x = document.getElementById(z);
-			if (x.style.visibility === 'hidden') {
-				x.style.visibility = 'visible';
-			} else {
-				x.style.visibility = 'hidden';
-			}
-		}
-		</script>
+	<div id="d1" onclick="this.style.visibility='hidden';">
+		<img class="bordered" src="{% static 'creation/images/data-dict1.png' %}">
+	</div>
+	<div id="d2" onclick="this.style.visibility='hidden';">
+		<img class="bordered" src="{% static 'creation/images/data-dict2.png' %}">
+	</div>
+	<div id="d3" onclick="this.style.visibility='hidden';">
+		<img class="bordered" src="{% static 'creation/images/data-dict3.png' %}">
+	</div>
 	<div class="dd">
-
-		<p><span class="ylw">Click on the images to zoom</span><br>Also <a class="alink" href="https://erichilario.pythonanywhere.com/static/HILARIO, Eric 121102 - HIT237 Assignment 2 Task 2.pdf">available as a PDF</a>.<br>Page 1 - Account and Character Tables<img class="dd1" src="{% static 'creation/images/data-dict1.png' %}" onclick="toggler(d1.id)" /></p>
+		<p><span class="ylw">Click on the images to zoom</span><br>Also <a class="alink" href="https://erichilario.pythonanywhere.com/HILARIO, Eric 121102 - HIT237 Assignment 2 Task 2.pdf">included in the Task 2 Documentation PDF</a>.<br>Page 1 - Account and Character Tables<img class="dd1" src="{% static 'creation/images/data-dict1.png' %}" onclick="toggler(d1.id)" /></p>
 		<p>Page 2 - Race, Job(aka Class), Color and Face Tables<img class="dd2" src="{% static 'creation/images/data-dict2.png' %}" onclick="toggler(d2.id)" /></p>
 		<p>Page 3 - Hair and Sex Tables<img class="dd3" src="{% static 'creation/images/data-dict3.png' %}" onclick="toggler(d3.id)" /></p></p>
 	</div>
-<div class="statue statue4"></div>
+	<div class="statue statue4"></div>
 </div>
 {% endblock %}

@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 class Account(models.Model):
-	user 				= models.OneToOneField(User, related_name='profile')
+	user 				= models.OneToOneField(User, related_name='profile') #Django User Model Extension
 	account_password 	= models.CharField(max_length=100)
 	account_email 		= models.CharField(max_length=100,blank=True, verbose_name='e-mail')
 
@@ -16,14 +16,14 @@ class Account(models.Model):
 
 class Race(models.Model):
 	race_name 			= models.CharField(max_length=20)
-	race_story 			= models.TextField(max_length=500, blank=True)
+	race_story 			= models.TextField(max_length=500, blank=True) #was supposed to create another div in the create view to describe this "race"
 
 	def __str__(self):
 		return self.race_name
 
 class Job(models.Model):
-	job_name 			= models.CharField(max_length=20)
-	job_story 			= models.TextField(max_length=500, blank=True)
+	job_name 			= models.CharField(max_length=20) #Barbarian, Knight, Ranger
+	job_story 			= models.TextField(max_length=500, blank=True) #was supposed to create another div in the create view to describe the "job"
 	race 				= models.ManyToManyField(Race)
 
 	def __str__(self):
@@ -54,7 +54,7 @@ class Sex(models.Model):
 		return self.sex_name
 
 class Character(models.Model):
-	character_name 		= models.CharField(max_length=12, unique=True) #need a function that pulls "unused" names from a dictionary.txt
+	character_name 		= models.CharField(max_length=12, unique=True)
 	slug 				= models.SlugField(max_length=12, null=True, blank=True, unique=True)
 	character_date 		= models.DateTimeField(blank=True,null=True,auto_now_add=True)
 	character_update 	= models.DateTimeField(blank=True,null=True,auto_now=True)
@@ -73,9 +73,9 @@ class Character(models.Model):
 		return self.character_name
 	
 	def get_absolute_url(self):
-		return "/character/%d/" % self.id #fix later, maybe
+		return "/character/%d/" % self.id
 
-@receiver(post_save, sender=User)
+@receiver(post_save, sender=User) #concurrently creates the linked User and Account
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Account.objects.create(user=instance)
